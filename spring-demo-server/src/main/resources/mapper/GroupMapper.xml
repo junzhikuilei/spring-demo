@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xyz.kuilei.spring.demo.dao.GroupMapper">
+    <insert id="memberMerge" parameterType="xyz.kuilei.spring.demo.bean.entity.TGroupMemberEntity">
+    merge into T_GROUP_MEMBER
+    using dual on (
+        GROUP_ID = #{groupId} and IDENTIFIER = #{identifier}
+    )
+    when not matched then
+        insert (
+            GROUP_MEMBER_ID,
+            GROUP_ID,
+            "TYPE",
+            IDENTIFIER
+        )
+        values (
+            #{groupMemberId},
+            #{groupId},
+            #{type},
+            #{identifier}
+        )
+    </insert>
+
+    <delete id="memberDelete" parameterType="xyz.kuilei.spring.demo.bean.entity.TGroupMemberEntity">
+    delete from T_GROUP_MEMBER
+    where GROUP_MEMBER_ID = #{groupMemberId}
+      and GROUP_ID = #{groupId}
+    </delete>
+</mapper>

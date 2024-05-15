@@ -1,0 +1,9 @@
+apply plugin: 'application'
+
+mainClassName = 'xyz.kuilei.spring.demo.DemoApplication'
+
+dependencies {
+    // todo 'java-library' 时，api、implementation 都可以……
+//    api project(':spring-demo-common')
+    implementation project(':spring-demo-common')
+}

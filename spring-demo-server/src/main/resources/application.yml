@@ -1,0 +1,47 @@
+server:
+  port: 12099
+  servlet:
+    context-path: /demo
+
+spring:
+  datasource:
+    username: testuser
+    password: testuser
+    url: jdbc:oracle:thin:@192.168.1.102:1521/dbcenter
+    driver-class-name: oracle.jdbc.OracleDriver
+#    username: root
+#    password: 123456
+#    url: jdbc:mysql://192.168.1.102:3306/dataxweb?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+#    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 3
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*.xml
+  # Packages to search type aliases. (Package delimiters are ",; \t\n")
+  typeAliasesPackage: xyz.kuilei.spring.demo.bean.entity
+  global-config:
+    db-config:
+      # 主键类型 {@link com.baomidou.mybatisplus.annotation.IdType}
+      id-type: ASSIGN_UUID
+    # 是否开启 LOGO
+    banner: false
+  # 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+  configuration-properties:
+    prefix:
+    blobType: BLOB
+    boolValue: TRUE
+
+knife4j:
+  enable: true
+  swagger:
+    group-name: 研发组
+    title: demo 框架——demo API
+    description:
+    version: 1.0.0
+    contact-name:

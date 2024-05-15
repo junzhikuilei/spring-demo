@@ -1,0 +1,89 @@
+buildscript {
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/public" }
+    }
+    ext {
+        springBootVersion = '2.0.4.RELEASE'
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE'
+    }
+}
+
+allprojects {
+    group 'xyz.kuilei.spring'
+    version '1.0.0'
+
+    apply plugin: 'idea'
+    // todo 'java' 不能打包？
+    //apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    repositories {
+        maven { url "https://maven.aliyun.com/repository/public" }
+    }
+
+    dependencies {
+        /**
+         * compile
+         */
+        // Spring
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+//        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+        // MyBatis
+        implementation 'org.mybatis:mybatis:3.5.6'
+        implementation 'com.baomidou:mybatisplus-spring-boot-starter:1.0.4'
+        implementation 'com.baomidou:mybatis-plus:3.4.2'
+        implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.2'
+        /*
+         * JDBC
+         */
+        implementation 'com.oracle.database.jdbc:ojdbc8:21.1.0.0'
+        // WARN: java.sql.SQLException: 不支持的字符集 (在类路径中添加 orai18n.jar): ZHS16GBK
+        implementation 'com.oracle.ojdbc:orai18n:19.3.0.0'
+//        implementation 'mysql:mysql-connector-java:5.1.47'
+        /*
+         * Annotation processor
+         */
+        implementation 'org.projectlombok:lombok:1.18.8'
+        annotationProcessor 'org.projectlombok:lombok:1.18.8'
+        // knife4j
+        implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.7'
+        implementation 'org.springframework.plugin:spring-plugin-core:2.0.0.RELEASE'
+        // Other
+        implementation 'com.alibaba:fastjson:1.2.83'
+        implementation 'commons-io:commons-io:2.7'
+        implementation 'commons-collections:commons-collections:3.2.2'
+        implementation 'org.apache.commons:commons-lang3:3.7'
+        implementation 'cn.hutool:hutool-all:5.8.4'
+        implementation 'com.google.code.findbugs:jsr305:3.0.1'
+        /**
+         * test
+         */
+        testImplementation 'junit:junit:4.12'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    configurations {
+//        all*.exclude module: 'spring-boot-starter-logging'  // WARN: 这会让日志无效。
+//        compile.exclude(group: 'com.zaxxer', module: 'HikariCP')
+//        compile.exclude(group: 'org.apache.tomcat', module: 'tomcat-jdbc')
+    }
+
+//    gradle.projectsEvaluated {
+//        tasks.withType(JavaCompile) {
+//            options.compilerArgs << '-Xlint:unchecked'
+//        }
+//    }
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xyz.kuilei.spring.demo.dao.CommonMapper">
+    <select id="dbSysdate" resultType="java.util.Date">
+    select sysdate from dual
+    </select>
+
+    <select id="dbSystimestamp" resultType="java.util.Date">
+    select systimestamp from dual
+    </select>
+</mapper>

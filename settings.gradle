@@ -1,0 +1,3 @@
+rootProject.name = 'spring-demo'
+include 'spring-demo-common'
+include 'spring-demo-server'
